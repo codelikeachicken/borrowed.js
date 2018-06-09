@@ -1,0 +1,1 @@
+const mysql = require('../src/borrowed').mysql

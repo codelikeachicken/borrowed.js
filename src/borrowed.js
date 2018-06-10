@@ -1,28 +1,45 @@
 module.exports = {
     php: {
-        ucwords (words) {
-            const isArray = Array.isArray(words);
+        ucwords (strings) {
+            const isArray = Array.isArray(strings);
+
             if (!isArray) {
-                let strArray = words.split(" "),
-                    retString = "";
-
-                for (var s in strArray) {
-                    let strCurrent = strArray[s],
-                        letters = strCurrent.split("");       
-
-                    letters[0] = letters[0].toUpperCase();       
-                    
-                    retString += letters.join("") + " ";
-                }    
-                return retString.trim();
+                var strArray = strings.split(" "),
+                    retString = uppercase(strArray).trim()
+  
+                return retString
             } else {
-                const listOfWords = [];
-                for (var i = 0; i < listOfWords; i++) {
+                const listOfStrings = [];
 
+                for (let i = 0; i < strings.length; i++) {
+                    var strCurrent = strings[i].split(" "),
+                        temp = uppercase(strCurrent).trim()
+
+                    listOfStrings.push(temp)
                 }
+
+                return listOfStrings;
             }
         }
     },
     mysql: {}
 }
 
+function uppercase (strArray) {
+    let retString = ""
+
+    for (let s in strArray) {
+        var strCurrent = strArray[s],
+            letters = strCurrent.split(""),
+            counter = 0
+
+        if (counter === 0) {
+            letters[counter] = letters[0].toUpperCase()
+            counter = 1
+        }
+        
+        retString += letters.join("") + " "   
+    }  
+
+    return retString;
+}
